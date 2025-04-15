@@ -19,7 +19,7 @@ jobs:
           version: "latest"
 
       - name: Render QMD to PDF
-        run: quarto render code.qmd --to pdf
+        run: quarto render report.qmd --to pdf
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
