@@ -1,0 +1,144 @@
+---
+title: "Project 2 Midterm Solutions (Updated)"
+author: "530395795"
+format:
+  html:
+    code-fold: true
+    embed-resources: true
+---
+
+## Question 1: Variance of Z
+
+```{r}
+var_X <- 0.2
+var_Y <- 0.5
+var_Z <- 5^2 * var_X + (-2)^2 * var_Y
+var_Z
+```
+
+**Answer**: $\text{Var}(Z) = 25 \cdot 0.2 - 4 \cdot 0.5 = \boxed{7}$
+
+------------------------------------------------------------------------
+
+## Question 2: Binomial Distribution (n=20, p=0.7)
+
+```{r}
+n <- 20
+p <- 0.7
+
+# (1) P(X > 16)
+p_more_than_16 <- 1 - pbinom(16, size=n, prob=p)
+p_more_than_16
+
+# (2) Expected Value
+expected <- n * p
+
+# (3) Standard Deviation
+std_dev <- sqrt(n * p * (1 - p))
+expected
+std_dev
+```
+
+**Answers**: - (1) $P(X > 16) \approx \boxed{0.1071}$ - (2) Expected: $\boxed{14}$ - (3) SD: $\boxed{2.049}$
+
+------------------------------------------------------------------------
+
+## Question 3: No Sales Day (Binomial, n=8, p=0.1)
+
+```{r}
+p_no_sale <- dbinom(0, size=8, prob=0.1)
+p_no_sale * 100
+```
+
+**Answer**: $\boxed{43.05\%}$ chance of making no sales.
+
+------------------------------------------------------------------------
+
+## Question 4: Standard Normal Range \[-A, A\]
+
+```{r}
+A <- qnorm(0.5 + 0.754 / 2)
+A
+```
+
+**Answer**: $A \approx \boxed{1.160}$
+
+------------------------------------------------------------------------
+
+## Question 5: Spending at McDonald's (Normal Distribution)
+
+```{r}
+mu <- 16.40
+sigma <- 2.75
+
+# (1) P(X < 10)
+p_less_than_10 <- pnorm(10, mean=mu, sd=sigma)
+
+# (2) 10% cutoff
+q_10_percent <- qnorm(0.10, mean=mu, sd=sigma)
+p_less_than_10
+q_10_percent
+```
+
+**Answers**: - (1) $P(X < 10) \approx \boxed{0.00997}$ - (2) 10% cutoff: $\boxed{12.88}$ dollars
+
+------------------------------------------------------------------------
+
+## Question 6: Interquartile Range of SAT Scores
+
+```{r}
+mu <- 1200
+sigma <- 150
+z_val <- qnorm(0.75)
+c <- z_val * sigma
+c
+```
+
+**Answer**: $c \approx \boxed{101.17}$, so IQR = $[1098.8, 1301.2]$
+
+------------------------------------------------------------------------
+
+## Question 7: True or False
+
+**Answers**: a. False — t(60) variance ≈ standard normal
+
+b.  True — $P(U < 42) \geq 0.90$ for $U \sim \chi^2(30)$
+
+c.  False — F-distribution allows numerator df \> denominator df
+
+d.  True — $\chi^2$ values $\geq 0$
+
+------------------------------------------------------------------------
+
+## Question 8: Sample Size Effects
+
+**Answer**: (c) variance of the sample mean **decreases**
+
+------------------------------------------------------------------------
+
+## Question 9: Required Sample Size for Desired SE
+
+```{r}
+pop_sd <- 20.3
+target_se <- 2.9
+n <- (pop_sd / target_se)^2
+n
+```
+
+**Answer**: $n \approx \boxed{49}$
+
+------------------------------------------------------------------------
+
+## Question 10: Mean and Variance of Sample Proportion
+
+```{r}
+p <- 0.55
+n <- 2000
+
+mean_phat <- p
+var_phat <- p * (1 - p) / n
+mean_phat
+var_phat
+```
+
+**Answers**: - Mean = $\boxed{0.55}$ - Variance $= \boxed{0.00012375}$
