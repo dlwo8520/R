@@ -108,14 +108,50 @@ ggplot(iris, aes(x = Petal.Length, fill = Species)) +
 ```
 
 ```{r}
+ggplot(iris, aes(x = Petal.Width, fill = Species)) +
+  geom_histogram(aes(y = ..density..), 
+                 position = "identity", 
+                 alpha = 0.5, 
+                 bins = 30, 
+                 color = "black") +
+  geom_density(alpha = 0.7) +
+  labs(title = "꽃잎 너비 분포 (꽃 종류별)", 
+       x = "꽃잎 너비 (cm)", 
+       y = "밀도 (Density)") +
+  theme_minimal(base_size = 14) +
+  scale_fill_brewer(palette = "Set2")
 
 ```
 
 ```{r}
+ggplot(iris, aes(x = Sepal.Length, fill = Species)) +
+  geom_histogram(aes(y = ..density..), 
+                 position = "identity", 
+                 alpha = 0.5, 
+                 bins = 30, 
+                 color = "black") +
+  geom_density(alpha = 0.7) +
+  labs(title = "꽃받침 길이 분포 (꽃 종류별)", 
+       x = "꽃받침 길이 (cm)", 
+       y = "밀도 (Density)") +
+  theme_minimal(base_size = 14) +
+  scale_fill_brewer(palette = "Set2")
 
 ```
 
 ```{r}
+ggplot(iris, aes(x = Sepal.Width, fill = Species)) +
+  geom_histogram(aes(y = ..density..), 
+                 position = "identity", 
+                 alpha = 0.5, 
+                 bins = 30, 
+                 color = "black") +
+  geom_density(alpha = 0.7) +
+  labs(title = "꽃받침 너비 분포 (꽃 종류별)", 
+       x = "꽃받침 너비 (cm)", 
+       y = "밀도 (Density)") +
+  theme_minimal(base_size = 14) +
+  scale_fill_brewer(palette = "Set2")
 
 ```
 
