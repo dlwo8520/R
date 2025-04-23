@@ -1,26 +1,148 @@
 ---
-title: "Untitled"
+title: "Iris Dataset Basic Analysis"
+author: "dlwo8520"
 format: html
 editor: visual
 ---
 
-## Quarto
+# Iris Dataset 기본 분석
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+## 패키지 불러오기
 
 ```{r}
-1 + 1
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
 ```
 
-You can add options to executable code like this
+## 데이터 불러오기
 
 ```{r}
-#| echo: false
-2 * 2
+data(iris) #데이터 불러오기
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+```{r}
+iris
+```
+
+## 데이터 구조 확인
+
+```{r}
+str(iris)
+
+```
+
+```{r}
+summary(iris)
+```
+
+```{r}
+# setosa 데이터만 추출
+setosa_data <- iris %>% filter(Species == "setosa")
+
+# versicolor 데이터만 추출
+versicolor_data <- iris %>% filter(Species == "versicolor")
+
+# virginica 데이터만 추출
+virginica_data <- iris %>% filter(Species == "virginica")
+
+
+
+```
+
+```{r}
+# setosa 요약 통계
+summary(setosa_data)
+
+```
+
+```{r}
+# versicolor 요약 통계
+summary(versicolor_data)
+
+```
+
+```{r}
+# virginica 요약 통계
+summary(virginica_data)
+
+```
+
+```{r}
+
+# 전체 데이터 기준 (꽃잎 길이)
+ggplot(iris, aes(x = Petal.Length)) +
+  geom_histogram(aes(y = ..density..), 
+                 bins = 30, 
+                 fill = "skyblue", 
+                 color = "black", 
+                 alpha = 0.7) +  # 히스토그램
+  geom_density(color = "darkblue", 
+               size = 1) +  # 밀도곡선 (선 모양)
+  labs(title = "전체 붓꽃 데이터의 꽃잎 길이 분포", 
+       x = "꽃잎 길이 (cm)", 
+       y = "밀도 (Density)") +  # 제목과 축 이름
+  theme_minimal(base_size = 14)  # 깔끔한 테마
+
+
+```
+
+```{r}
+# 패키지 불러오기
+library(ggplot2)
+
+# 꽃잎 길이 (Petal.Length) 기준으로 시각화
+ggplot(iris, aes(x = Petal.Length, fill = Species)) +
+  geom_histogram(aes(y = ..density..), 
+                 position = "identity", 
+                 alpha = 0.5, 
+                 bins = 30, 
+                 color = "black") +  # 히스토그램
+  geom_density(alpha = 0.7) +  # 밀도곡선 (선모양)
+  labs(title = "꽃잎 길이 분포 (꽃 종류로 분류)", 
+       x = "꽃잎 길이 (cm)", 
+       y = "밀도 (Density)") +  # 제목과 축 라벨
+  theme_minimal(base_size = 14) +  # 깔끔한 테마
+  scale_fill_brewer(palette = "Set2")  # 색상 팔레트
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+##  시각화: Sepal.Length vs Sepal.Width
+
+```{r}
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point() +
+  theme_minimal()
+```
+
+## 시각화: Petal.Length vs Petal.Width
+
+```{r}
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Species)) +
+  geom_point() +
+  theme_minimal()
+```
+
+## 종별 평균 요약
+
+```{r}
+iris %>% 
+  group_by(Species) %>% 
+  summarise(across(where(is.numeric), mean, .names = "mean_{.col}"))
+```
+
+## 결론
+
+Iris 데이터셋에 대한 기본적인 구조와 변수 간의 관계를 시각화 및 요약 통계를 통해 파악했습니다. 이후에는 **통계 분석** 또는 **모델링**을 추가로 진행할 수 있습니다.
